@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqUnitTest", "MoqUnitTest\MoqUnitTest.csproj", "{EE096848-84D2-4EF3-879F-9CFC30A3F9DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementTest", "UserManagementTest\UserManagementTest.csproj", "{B455A52A-BF3D-40E9-A1FC-4C18571E14DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE096848-84D2-4EF3-879F-9CFC30A3F9DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE096848-84D2-4EF3-879F-9CFC30A3F9DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE096848-84D2-4EF3-879F-9CFC30A3F9DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE096848-84D2-4EF3-879F-9CFC30A3F9DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B455A52A-BF3D-40E9-A1FC-4C18571E14DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B455A52A-BF3D-40E9-A1FC-4C18571E14DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B455A52A-BF3D-40E9-A1FC-4C18571E14DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B455A52A-BF3D-40E9-A1FC-4C18571E14DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
