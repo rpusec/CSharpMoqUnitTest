@@ -85,9 +85,10 @@ namespace UserManagementTest
                         {
                             targetUser.Id = allUsers.Count + 1;
                             allUsers.Add(targetUser);
+                            return true;
                         }
 
-                        return true;
+                        return false;
                     }
                 );
 
@@ -131,6 +132,10 @@ namespace UserManagementTest
             //check if at least the user's name had been updated, should 
             //not be equal to the user's previous name
             Assert.AreNotEqual(prevUserName, userManagement.FindAll()[randUserIndex].Name, "The user's name was not edited. ");
+
+            //should return false since a user with id 800 does not exist, therefore it cannot add it
+            //nor can it find a user with the said id value 
+            Assert.IsFalse(userManagement.SaveUser(new User(800, "arya", "stark", "addr", UserPrivileges.MODERATOR)));
         }
 
         [TestMethod]
