@@ -8,8 +8,10 @@ namespace MoqUnitTest.BookOrderingSystem.Business
 {
     public interface IBookOrderingSystem
     {
-        bool OrderBookCopy(Model.Customer customer);
-        bool ReturnBookCopy(Model.Customer customer);
-        IList<Model.BookCopy> ViewAvailableBookCopies();
+        public bool OrderBookCopy(Model.Customer customer);
+        public bool ReturnBookCopy(Model.Customer customer);
+        public IList<Model.BookCopy> ViewAvailableBookCopies();
+        private void PremiumPurchase(Model.Customer customer);
+        private void NormalPurchase(Model.Customer customer);
     }
 }
