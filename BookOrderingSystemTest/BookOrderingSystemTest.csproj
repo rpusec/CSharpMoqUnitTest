@@ -59,6 +59,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoqUnitTest\MoqUnitTest.csproj">
+      <Project>{ee096848-84d2-4ef3-879f-9cfc30a3f9db}</Project>
+      <Name>MoqUnitTest</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

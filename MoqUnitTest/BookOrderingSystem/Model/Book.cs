@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoqUnitTest.BookOrderingSystem.Model
 {
-    public enum Genre { HORROR, SIFI, DOCUMENTARY, COMEDY }
+    public enum BookGenre { HORROR, SIFI, DOCUMENTARY, COMEDY, FANTASY }
 
     public class Book
     {
@@ -14,9 +14,9 @@ namespace MoqUnitTest.BookOrderingSystem.Model
         public String Author { get; set; }
         public String Title { get; set; }
         public double Price { get; set; }
-        public Genre Genre { get; set; }
+        public BookGenre Genre { get; set; }
 
-        public Book(String _author, String _title, double _price, Genre _genre) 
+        public Book(String _author, String _title, double _price, BookGenre _genre) 
         {
             Author = _author;
             Title = _title;
