@@ -11,10 +11,12 @@ namespace MoqUnitTest.BookOrderingSystem.Model
     public class Customer
     {
         public IList<Model.BookCopy> OrderedBooks { get; private set; }
+        public CustomerLevel CustomerLevel { get; set; }
 
-        public Customer() 
+        public Customer(CustomerLevel _customerLevel) 
         {
             OrderedBooks = new List<Model.BookCopy>();
+            CustomerLevel = _customerLevel;
         }
     }
 }
