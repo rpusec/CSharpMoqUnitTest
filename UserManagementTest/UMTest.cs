@@ -62,14 +62,18 @@ namespace UserManagementTest
             mockUserManagement.Setup(x => x.FindByPrivilege(It.IsAny<UserPrivileges>()))
                 .Returns((UserPrivileges up) => allUsers.Where(u => u.Privilege == up).ToList<User>());
 
+            /**
+             *  Adds or updates a user. A user is added if their id value is null, otherwise the 
+             *  method finds a user with the same id value and updates that particular user. 
+             */
             mockUserManagement.Setup(x => x.SaveUser(It.IsAny<User>()))
                 .Returns(
                     (User targetUser) => {
 
-                        //if its id has a value of null, then update the user's information
+                        //if id does not have a value of null, update user's information
                         if (targetUser.Id != null)
                         {
-                            //searching for user with specified id and updating their information
+                            //searching for user with specified id and update their information
                             foreach(User u in allUsers)
                             {
                                 if (u.Id.Equals(targetUser.Id))
@@ -83,11 +87,14 @@ namespace UserManagementTest
                         }
                         else
                         {
+                            //otherwise generate an id value and add the user to the list
                             targetUser.Id = allUsers.Count + 1;
                             allUsers.Add(targetUser);
                             return true;
                         }
 
+                        //returns false if a user was not updated (the specified 
+                        //id value did not match any other user's id value)
                         return false;
                     }
                 );
@@ -96,6 +103,7 @@ namespace UserManagementTest
             mockUserManagement.Setup(x => x.CheckPrivilege(It.IsAny<UserPrivileges>(), It.IsAny<User>()))
                 .Returns((UserPrivileges privilege, User user) => user.Privilege == privilege ? true : false);
 
+            //saves the actual user management instance so that it can be later used 
             userManagement = mockUserManagement.Object;
         }
 
