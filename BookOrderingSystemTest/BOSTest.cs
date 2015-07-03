@@ -8,6 +8,10 @@ using System.Collections.Generic;
 
 namespace BookOrderingSystemTest
 {
+    /// <summary>
+    /// Testing the IBookOrderingSystem interface using Moq Framework. 
+    /// @author Roman Pusec
+    /// </summary>
     [TestClass]
     public class BOSTest
     {
@@ -126,8 +130,8 @@ namespace BookOrderingSystemTest
                 .ViewBookCopiesByBook(mockBookOrderingSystem.Object.ViewAvailableBooks()[2]);
 
             //checking book copy quantity
-            Assert.AreEqual(5, harryPotterCopies.Count);
-            Assert.AreEqual(3, alicePotterCopies.Count);
+            Assert.AreEqual(5, harryPotterCopies.Count, "Incorrect book copy quantity. ");
+            Assert.AreEqual(3, alicePotterCopies.Count, "Incorrect book copy quantity. ");
         }
 
         [TestMethod]
@@ -140,14 +144,16 @@ namespace BookOrderingSystemTest
                 customer, randBook);
 
             //-1 since a book copy was purchased
-            Assert.AreEqual(bookCopiesData[randBook] - 1, mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count);
+            Assert.AreEqual(bookCopiesData[randBook] - 1, mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count, 
+                "Count should be less than " + bookCopiesData[randBook] + " since a copy was ordered. ");
 
             //book returned
             mockBookOrderingSystem.Object.ReturnBookCopy(
                 customer, randBook);
 
             //since the book was returned, the count should be normal
-            Assert.AreEqual(bookCopiesData[randBook], mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count);
+            Assert.AreEqual(bookCopiesData[randBook], mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count, 
+                "Count should be " + bookCopiesData[randBook] + ". ");
         }
 
         [TestMethod]
