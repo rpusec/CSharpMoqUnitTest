@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoqUnitTest.Model
+namespace MoqUnitTest.UserManagement.Model
 {
     public enum UserPrivileges {
         GUEST, MODERATOR, ADMIN

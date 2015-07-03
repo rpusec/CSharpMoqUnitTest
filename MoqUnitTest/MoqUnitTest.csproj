@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookOrderingSystem\Business\IBookOrderingSystem.cs" />
+    <Compile Include="BookOrderingSystem\Model\Book.cs" />
+    <Compile Include="BookOrderingSystem\Model\BookCopy.cs" />
+    <Compile Include="BookOrderingSystem\Model\Customer.cs" />
     <Compile Include="UserManagement\Business\IUserManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,10 +53,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BookOrderingSystem\Business\" />
-    <Folder Include="BookOrderingSystem\Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

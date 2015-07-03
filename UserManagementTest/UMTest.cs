@@ -4,8 +4,8 @@ using Moq;
 using System.Linq;
 using MoqUnitTest;
 using System.Collections.Generic;
-using MoqUnitTest.Model;
-using MoqUnitTest.Business;
+using MoqUnitTest.UserManagement.Model;
+using MoqUnitTest.UserManagement.Business;
 using System.Collections;
 
 namespace UserManagementTest
