@@ -105,14 +105,14 @@ namespace BookOrderingSystemTest
 
         [TestMethod]
         public void ViewAllAvailableBooksTest() {
-            Assert.AreEqual(mockBookOrderingSystem.Object.ViewAvailableBooks().Count, 4, "Not the same amount of books. ");
+            Assert.AreEqual(4, mockBookOrderingSystem.Object.ViewAvailableBooks().Count, "Not the same amount of books. ");
             
             var sum = 0; //sum of all of the book copies
 
             foreach(var bookCopyInfo in bookCopiesData)
                 sum += bookCopyInfo.Value;
 
-            Assert.AreEqual(mockBookOrderingSystem.Object.ViewAvailableBookCopies().Count, sum, "Not the same amount of book copies");
+            Assert.AreEqual(sum, mockBookOrderingSystem.Object.ViewAvailableBookCopies().Count, "Not the same amount of book copies");
         }
 
         [TestMethod]
@@ -126,8 +126,57 @@ namespace BookOrderingSystemTest
                 .ViewBookCopiesByBook(mockBookOrderingSystem.Object.ViewAvailableBooks()[2]);
 
             //checking book copy quantity
-            Assert.AreEqual(harryPotterCopies.Count, 5);
-            Assert.AreEqual(alicePotterCopies.Count, 3);
+            Assert.AreEqual(5, harryPotterCopies.Count);
+            Assert.AreEqual(3, alicePotterCopies.Count);
+        }
+
+        [TestMethod]
+        public void OrderBookTest() {
+            var customer = new Customer(CustomerLevel.GOLD);
+            var randBook = mockBookOrderingSystem.Object.ViewAvailableBooks()[0];
+
+            //book ordered
+            mockBookOrderingSystem.Object.OrderBookCopy(
+                customer, randBook);
+
+            //-1 since a book copy was purchased
+            Assert.AreEqual(bookCopiesData[randBook] - 1, mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count);
+
+            //book returned
+            mockBookOrderingSystem.Object.ReturnBookCopy(
+                customer, randBook);
+
+            //since the book was returned, the count should be normal
+            Assert.AreEqual(bookCopiesData[randBook], mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count);
+        }
+
+        [TestMethod]
+        public void PremiumPurchaseTest() {
+            CommonPurchaseTest(CustomerLevel.GOLD);
+
+            //would only work if the customer has GOLD CustomerLevel
+            mockBookOrderingSystem.Verify(x => x.PremiumPurchase(It.Is<Customer>(
+                c => c.CustomerLevel == CustomerLevel.GOLD)));
+        }
+
+        [TestMethod]
+        public void NormalPurchaseTest() {
+            CommonPurchaseTest(CustomerLevel.BRONZE);
+
+            //would only work if the customer has any CustomerLevel except GOLD
+            mockBookOrderingSystem.Verify(x => x.NormalPurchase(It.IsAny<Customer>()));
+        }
+
+        /// <summary>
+        /// Contains common code block for both Purchase test methods. 
+        /// </summary>
+        /// <param name="cLevel">The customer level. </param>
+        private void CommonPurchaseTest(CustomerLevel cLevel) {
+            var customer = new Customer(cLevel);
+            var randBook = mockBookOrderingSystem.Object.ViewAvailableBooks()[0];
+
+            mockBookOrderingSystem.Object.OrderBookCopy(
+                customer, randBook);
         }
     }
 }
