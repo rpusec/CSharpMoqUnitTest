@@ -12,6 +12,7 @@ namespace MoqUnitTest.BookOrderingSystem.Business
         bool ReturnBookCopy(Model.Customer customer, Model.Book book);
         IList<Model.BookCopy> ViewAvailableBookCopies();
         IList<Model.Book> ViewAvailableBooks();
+        IList<Model.BookCopy> ViewBookCopiesByBook(Model.Book book);
         void PremiumPurchase(Model.Customer customer);
         void NormalPurchase(Model.Customer customer);
     }

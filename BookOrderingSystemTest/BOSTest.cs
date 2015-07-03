@@ -39,14 +39,11 @@ namespace BookOrderingSystemTest
             //preparing book copies
             IList<BookCopy> bookCopies = new List<BookCopy>();
 
-            foreach(var book in books)
+            foreach(var bookCopyInfo in bookCopiesData)
             {
-                foreach(var bookCopyInfo in bookCopiesData)
-                {
-                    //adds as many copies of the book as required
-                    for (var i = 0; i < bookCopyInfo.Value; i++)
-                        bookCopies.Add(new BookCopy(bookCopyInfo.Key));
-                }
+                //adds as many copies of the book as required
+                for (var i = 0; i < bookCopyInfo.Value; i++)
+                    bookCopies.Add(new BookCopy(bookCopyInfo.Key));
             }
 
             //view all book copies
@@ -54,6 +51,10 @@ namespace BookOrderingSystemTest
             
             //view all books
             mockBookOrderingSystem.Setup(x => x.ViewAvailableBooks()).Returns(books);
+
+            //returns list of book copies by target book
+            mockBookOrderingSystem.Setup(x => x.ViewBookCopiesByBook(It.IsAny<Book>()))
+                .Returns((Book book) => bookCopies.Where(x => x.Book == book).ToList<BookCopy>());
 
             //orders a book copy and excludes the copy from the list
             mockBookOrderingSystem.Setup(x => x.OrderBookCopy(It.IsAny<Customer>(), It.IsAny<Book>()))
@@ -100,6 +101,33 @@ namespace BookOrderingSystemTest
 
                     return true;
                 });
+        }
+
+        [TestMethod]
+        public void ViewAllAvailableBooksTest() {
+            Assert.AreEqual(mockBookOrderingSystem.Object.ViewAvailableBooks().Count, 4, "Not the same amount of books. ");
+            
+            var sum = 0; //sum of all of the book copies
+
+            foreach(var bookCopyInfo in bookCopiesData)
+                sum += bookCopyInfo.Value;
+
+            Assert.AreEqual(mockBookOrderingSystem.Object.ViewAvailableBookCopies().Count, sum, "Not the same amount of book copies");
+        }
+
+        [TestMethod]
+        public void BookCopiesByBookTest() {
+            //harry potter copies
+            var harryPotterCopies = mockBookOrderingSystem.Object
+                .ViewBookCopiesByBook(mockBookOrderingSystem.Object.ViewAvailableBooks()[0]);
+
+            //alice in wonderland copies
+            var alicePotterCopies = mockBookOrderingSystem.Object
+                .ViewBookCopiesByBook(mockBookOrderingSystem.Object.ViewAvailableBooks()[2]);
+
+            //checking book copy quantity
+            Assert.AreEqual(harryPotterCopies.Count, 5);
+            Assert.AreEqual(alicePotterCopies.Count, 3);
         }
     }
 }
