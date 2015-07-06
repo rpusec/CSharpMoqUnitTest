@@ -100,10 +100,10 @@ namespace BookOrderingSystemTest
                     {
                         customer.OrderedBooks.Remove(customersBookCopy);
                         bookCopies.Add(customersBookCopy);
-                        return false;
+                        return true;
                     }
 
-                    return true;
+                    return false;
                 });
         }
 
@@ -148,8 +148,8 @@ namespace BookOrderingSystemTest
                 "Count should be less than " + bookCopiesData[randBook] + " since a copy was ordered. ");
 
             //book returned
-            mockBookOrderingSystem.Object.ReturnBookCopy(
-                customer, randBook);
+            Assert.IsTrue(mockBookOrderingSystem.Object.ReturnBookCopy(
+                customer, randBook), "The book should've been returned. ");
 
             //since the book was returned, the count should be normal
             Assert.AreEqual(bookCopiesData[randBook], mockBookOrderingSystem.Object.ViewBookCopiesByBook(randBook).Count, 
